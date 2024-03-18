@@ -51,4 +51,27 @@ app.post("/signin",function(req,res){
     }) 
 })
 
+
+app.get("/users",function(req,res){
+         const token = req.headers.authorization;
+        const decode = jwt.verify(token,jwtPassword);
+        const username = decode.username;
+    
+
+        res.json({
+            users:USERS.filter(function(val){
+                if(val.username == username){
+                    return false;
+                }else{
+                return true;
+                }
+            })
+        })
+
+         res.json({
+            users:USERS
+        })
+
+})
+
 app.listen(3000)
